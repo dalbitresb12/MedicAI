@@ -8,7 +8,7 @@
 
 ### Nombre del Startup: MedicAI Solutions
 
-###Integrantes:
+Integrantes:
 |Alumno|Codigo|
 |------|------|
 |Lazo Tapia, Jesús Antonio|U202019038|
