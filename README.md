@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AppMedicAIFront
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
@@ -57,3 +58,23 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# MedicAI
+
+# Desarrollo Agile de Productos de Software
+
+### Profesor: Bautista Fuentes, Ivan Christian
+
+### Sección: 2922
+
+### Nombre del Startup: MedicAI Solutions
+
+Integrantes:
+|Alumno|Codigo|
+|------|------|
+|Lazo Tapia, Jesús Antonio|U202019038|
+|Albitres Blondet, Diego|U202015652|
+|Futuri Illa, Wilfredo|U201924361|
+|García Murga, Alonso Moisés|U202110867|
+|Velasquez Cahuancama, Anderson|U202114940|
+>>>>>>> 9d77c3f5d293de280d279d17789bbde08078055d
