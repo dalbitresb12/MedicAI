@@ -59,7 +59,8 @@ uv pip install -e .
 
 ## Crear un archivo .env en la razi del proyecto con la imagen antes de ejecutar el backend
 
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/40a1e9e6-d506-41a3-a879-ae10d38d30ea)
+
 
 # Versión de la API (útil para rutas y versionamiento)
 API_VERSION=v1
