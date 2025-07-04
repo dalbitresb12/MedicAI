@@ -39,7 +39,7 @@ Este es el backend de un sistema de gestión clínica desarrollado con **FastAPI
 ## ⚙️ Instalación y ejecución local
 
 ### 1. Clonar el repositorio
-```bash
+bash
 git clone https://github.com/tu_usuario/tu_repositorio.git
 cd tu_repositorio
 
