@@ -21,7 +21,6 @@ Explore los puntos finales a continuación para ver cómo puede integrar nuestra
 """
 CONTACT = {
     "name": "Anderson Velasquez",
-    "url": "https://www.linkedin.com/in/johan-huanca-nina-a76a2b204",
     "email": "andersonvelezca@gmail.com",
 }
 LICENSE_INFO = {
