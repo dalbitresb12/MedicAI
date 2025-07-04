@@ -1,6 +1,6 @@
 # 🏥 Backend - Sistema de Gestión Clínica (FastAPI + SQLModel + JWT)
 
-Este es el backend de un sistema de gestión clínica desarrollado con **FastAPI**. Incluye autenticación y autorización por roles (ADMIN, MEDIC, PATIENT), gestión de usuarios, médicos, citas médicas, historial clínico y carga de imágenes.
+Este es el backend de un sistema de gestión clínica desarrollado con **FastAPI**. Incluye autenticación y autorización por roles (ADMIN, MEDIC, PATIENT), envios de email (senders y listener), gestión de usuarios, médicos, citas médicas, historial clínico y carga de imágenes.
 
 ---
 
@@ -8,6 +8,7 @@ Este es el backend de un sistema de gestión clínica desarrollado con **FastAPI
 
 - 🔐 Autenticación con JWT
 - 👤 Gestión de usuarios y médicos
+- 📅 Envio de notificaciones y archivos via email (SendGrid)
 - 📅 Separación de citas médicas por fecha y hora
 - 📁 Subida de foto de perfil de médicos
 - 📄 Registro y consulta de historial clínico
