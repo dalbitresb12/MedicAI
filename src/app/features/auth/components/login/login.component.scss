@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.p-password, .p-password input {
+  width: 100%;
+}
+
+.p-button {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.p-button:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.p-button-link {
+  color: #2563eb;
+}
+
+.p-button-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}

@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Sidebar styles */
+aside {
+  @apply flex flex-col;
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  z-index: 20;
+}
+
+/* Active menu item style */
+.active-menu-item {
+  @apply bg-blue-50 text-blue-600;
+
+  i {
+    @apply text-blue-600;
+  }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  aside {
+    position: fixed;
+    height: 100vh;
+
+    &:not(.w-20) {
+      @apply shadow-lg;
+    }
+  }
+}
