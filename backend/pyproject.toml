@@ -1,0 +1,28 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "alembic>=1.16.2",
+    "debugpy>=1.8.14",
+    "dependency-injector>=4.48.1",
+    "fastapi[standard]>=0.115.14",
+    "mysql-connector-python>=9.3.0",
+    "paho-mqtt>=2.1.0",
+    "passlib[argon2]>=1.7.4",
+    "psycopg2-binary>=2.9.10",
+    "pydantic-settings>=2.10.1",
+    "pyjwt>=2.10.1",
+    "python-dotenv>=1.1.1",
+    "reportlab>=4.4.2",
+    "sendgrid>=6.12.4",
+    "sqlmodel>=0.0.24",
+    "uvicorn[standard]>=0.35.0",
+]
+
+
+[tool.setuptools]
+packages = ["app"]
+package-dir = {"" = "src"}
