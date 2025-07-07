@@ -2,6 +2,7 @@ import base64
 from functools import cached_property
 from io import BytesIO
 
+from jinja2 import Environment, PackageLoader, Template, select_autoescape
 from postmark import PMMail
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
@@ -17,6 +18,11 @@ class EmailService:
     def __init__(self):
         self.api_key = settings.postmark_api_key
         self.sender_email = settings.email_sender
+        parent_module = ".".join(__name__.split(".")[:-1])
+        self.template_environment = Environment(
+            loader=PackageLoader(parent_module, "email"),
+            autoescape=select_autoescape(),
+        )
 
     def generate_pdf(self, appointment: Appointment) -> bytes:
         buffer = BytesIO()
@@ -55,15 +61,13 @@ class EmailService:
         subject = " Confirmación de Cita Médica"
         to = appointment.patient_email
         logo_url = settings.public_logo_url
-        html_content = self._appointment_confirmation_template.format(
-            **{
-                "logo_url": logo_url,
-                "patient_full_name": appointment.patient_full_name,
-                "medic_full_name": appointment.medic_full_name,
-                "specialty": appointment.specialty,
-                "day": appointment.day.strftime("%Y-%m-%d"),
-                "hour": appointment.hour.strftime("%H:%M"),
-            }
+        html_content = self._appointment_confirmation_template.render(
+            logo_url=logo_url,
+            patient_full_name=appointment.patient_full_name,
+            medic_full_name=appointment.medic_full_name,
+            specialty=appointment.specialty,
+            day=appointment.day.strftime("%Y-%m-%d"),
+            hour=appointment.hour.strftime("%H:%M"),
         )
 
         try:
@@ -85,10 +89,10 @@ class EmailService:
             logger.error(f"Error al enviar correo: {e}")
 
     @cached_property
-    def _appointment_confirmation_template(self) -> str:
-        import importlib.resources
-
-        parent_module = ".".join(__name__.split(".")[:-1])
-        return importlib.resources.read_text(
-            f"{parent_module}.email", "appointment-confirmation.template.html"
+    def _appointment_confirmation_template(self) -> Template:
+        template_name = "appointment_confirmation.html"
+        if template := self.template_environment.get_template(template_name):
+            return template
+        raise ValueError(
+            f"Template '{template_name}' not found in email templates directory."
         )
