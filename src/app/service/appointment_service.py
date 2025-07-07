@@ -73,3 +73,38 @@ class AppointmentService:
             "occupied": occupied,
             "available": available
         }
+
+
+
+    def get_by_patient_email(self, email: str) -> List[Appointment]:
+        citas = self.repository.find_by_patient_email(email)
+        if not citas:
+            raise HTTPException(status_code=404, detail="No se encontraron citas para este paciente")
+        return citas
+
+    def get_last_by_patient_email(self, email: str) -> Appointment:
+        cita = self.repository.find_last_by_patient_email(email)
+        if not cita:
+            raise HTTPException(status_code=404, detail="No se encontró una última cita para este paciente")
+        return cita
+    
+
+    def delete_by_patient_and_id(self, appointment_id: int, email: str) -> None:
+        success = self.repository.delete_by_id_and_email(appointment_id, email)
+        if not success:
+            raise HTTPException(
+                status_code=403,
+                detail="No tienes permiso para eliminar esta cita o no existe"
+            )
+
+
+
+
+
+
+
+
+
+
+
+

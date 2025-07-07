@@ -1,4 +1,5 @@
 from datetime import date
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from dependency_injector.wiring import inject, Provide
 
@@ -65,3 +66,42 @@ def get_schedule_status(
 
     return appointment_service.get_schedule_status(medic.user.full_name, day)
 
+# Ver todas las citas del paciente autenticado
+@router.get("/my", response_model=List[AppointmentResponse],
+            dependencies=[Depends(authorizeRoles([Role.PATIENT]) )],
+            description="Devuelve todas las citas agendadas por el paciente autenticado.")
+@inject
+def get_my_appointments(
+    current_user: User = Depends(getAuthenticatedUser),
+    service: AppointmentService = Depends(Provide[Container.appointmentService])
+):
+    appointments = service.get_by_patient_email(current_user.email)
+    return [AppointmentMapper.modelToResponse(a) for a in appointments]
+
+
+
+@router.get("/my/last", response_model=AppointmentResponse,
+            dependencies=[Depends(authorizeRoles([Role.PATIENT]) )],
+            description="Devuelve la última cita agendada por el paciente autenticado.")
+@inject
+def get_my_last_appointment(
+    current_user: User = Depends(getAuthenticatedUser),
+    service: AppointmentService = Depends(Provide[Container.appointmentService])
+):
+    appointment = service.get_last_by_patient_email(current_user.email)
+    return AppointmentMapper.modelToResponse(appointment)
+
+
+
+
+@router.delete("/my/{appointment_id}", response_model=dict,
+               dependencies=[Depends(authorizeRoles([Role.PATIENT]) )],
+               description="Permite al paciente autenticado eliminar una cita específica si le pertenece.")
+@inject
+def delete_my_appointment(
+    appointment_id: int,
+    current_user: User = Depends(getAuthenticatedUser),
+    service: AppointmentService = Depends(Provide[Container.appointmentService])
+):
+    service.delete_by_patient_and_id(appointment_id, current_user.email)
+    return {"message": "Cita eliminada correctamente"}
