@@ -120,7 +120,6 @@ async def deleteUserById(
     description="Obtiene la información del usuario autenticado. Accesible por ADMIN y MEDIC.",
     dependencies=[Depends(authorizeRoles([Role.MEDIC, Role.ADMIN]))],
 )
-@inject
 async def getMyUser(authenticatedUser: User = Depends(getAuthenticatedUser)):
     return UserMapper.modelToResponse(authenticatedUser)
 
