@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 
 
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 import {DropdownModule} from 'primeng/dropdown';
@@ -27,7 +27,8 @@ import {LoginRequest} from '../../models/login-request.model';
     Toast,
     NgClass,
     Button,
-    NgOptimizedImage
+    NgOptimizedImage,
+    RouterLink
   ],
   providers: [MessageService]
 })

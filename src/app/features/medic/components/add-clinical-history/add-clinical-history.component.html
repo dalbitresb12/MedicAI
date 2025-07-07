@@ -1,0 +1,141 @@
+<div class="max-w-6xl mx-auto p-6">
+  <p-toast></p-toast>
+
+  <p-card class="shadow-sm rounded-lg border border-gray-100">
+    <div class="p-card-title text-center text-2xl font-light text-gray-700 mb-6">Historia Clínica</div>
+
+    <form [formGroup]="historyForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 lg:grid-cols-2 gap-6 px-4">
+      <!-- Columna Izquierda -->
+      <div class="space-y-6">
+        <!-- Datos del paciente -->
+        <div class="field">
+          <label for="patient_email" class="block text-sm font-medium text-gray-600 mb-1">Email del paciente</label>
+          <input
+            pInputText
+            id="patient_email"
+            formControlName="patient_email"
+            placeholder="ejemplo@dominio.com"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('patient_email')?.invalid && historyForm.get('patient_email')?.touched}"
+          >
+          <small *ngIf="historyForm.get('patient_email')?.invalid && historyForm.get('patient_email')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            {{ historyForm.get('patient_email')?.errors?.['required'] ? 'Email es requerido' : 'Email inválido' }}
+          </small>
+        </div>
+
+        <div class="field">
+          <label for="patient_full_name" class="block text-sm font-medium text-gray-600 mb-1">Nombre completo</label>
+          <input
+            pInputText
+            id="patient_full_name"
+            formControlName="patient_full_name"
+            placeholder="Nombre completo del paciente"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('patient_full_name')?.invalid && historyForm.get('patient_full_name')?.touched}"
+          >
+          <small *ngIf="historyForm.get('patient_full_name')?.invalid && historyForm.get('patient_full_name')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            Nombre completo es requerido
+          </small>
+        </div>
+
+        <!-- Síntomas -->
+        <div class="field">
+          <label for="symptoms" class="block text-sm font-medium text-gray-600 mb-1">Síntomas</label>
+          <textarea
+            pInputTextarea
+            id="symptoms"
+            formControlName="symptoms"
+            rows="5"
+            placeholder="Describa los síntomas del paciente"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('symptoms')?.invalid && historyForm.get('symptoms')?.touched}"
+          ></textarea>
+          <small *ngIf="historyForm.get('symptoms')?.invalid && historyForm.get('symptoms')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            Descripción de síntomas es requerida
+          </small>
+        </div>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="space-y-6">
+        <!-- Diagnóstico -->
+        <div class="field">
+          <label for="diagnosis" class="block text-sm font-medium text-gray-600 mb-1">Diagnóstico</label>
+          <textarea
+            pInputTextarea
+            id="diagnosis"
+            formControlName="diagnosis"
+            rows="5"
+            placeholder="Describa el diagnóstico"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('diagnosis')?.invalid && historyForm.get('diagnosis')?.touched}"
+          ></textarea>
+          <small *ngIf="historyForm.get('diagnosis')?.invalid && historyForm.get('diagnosis')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            Diagnóstico es requerido
+          </small>
+        </div>
+
+        <!-- Medicamentos -->
+        <div class="field">
+          <label for="medications" class="block text-sm font-medium text-gray-600 mb-1">Medicamentos</label>
+          <textarea
+            pInputTextarea
+            id="medications"
+            formControlName="medications"
+            rows="3"
+            placeholder="Lista de medicamentos recetados"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('medications')?.invalid && historyForm.get('medications')?.touched}"
+          ></textarea>
+          <small *ngIf="historyForm.get('medications')?.invalid && historyForm.get('medications')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            Medicamentos son requeridos
+          </small>
+        </div>
+
+        <!-- Tratamiento -->
+        <div class="field">
+          <label for="treatment" class="block text-sm font-medium text-gray-600 mb-1">Tratamiento</label>
+          <textarea
+            pInputTextarea
+            id="treatment"
+            formControlName="treatment"
+            rows="5"
+            placeholder="Describa el tratamiento recomendado"
+            class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+            [ngClass]="{'border-red-500': historyForm.get('treatment')?.invalid && historyForm.get('treatment')?.touched}"
+          ></textarea>
+          <small *ngIf="historyForm.get('treatment')?.invalid && historyForm.get('treatment')?.touched"
+                 class="text-red-500 text-xs mt-1 block">
+            Tratamiento es requerido
+          </small>
+        </div>
+      </div>
+
+      <!-- Botones (full width) -->
+      <div class="lg:col-span-2 flex justify-end gap-3 mt-6 border-t pt-6">
+        <button
+          pButton
+          type="button"
+          label="Limpiar"
+          icon="pi pi-trash"
+          class="p-button-text p-button-plain"
+          (click)="historyForm.reset()"
+        ></button>
+        <button
+          pButton
+          type="submit"
+          label="Guardar Historia"
+          icon="pi pi-save"
+          [loading]="loading"
+          [disabled]="historyForm.invalid"
+          class="bg-blue-500 hover:bg-blue-600 transition-colors"
+        ></button>
+      </div>
+    </form>
+  </p-card>
+</div>

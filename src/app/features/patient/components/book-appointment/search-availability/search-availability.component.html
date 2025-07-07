@@ -1,0 +1,66 @@
+<!-- search-availability.component.html -->
+<div class="max-w-6xl mx-auto p-6">
+  <!-- Breadcrumb -->
+  <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
+
+  <div class="p-6 mt-4">
+    <!-- Título -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+      ¿Cómo deseas agendar?
+    </h2>
+
+    <!-- Subtítulo -->
+    <h3 class="text-xl font-semibold text-gray-700 mb-8 text-center">
+      Busca disponibilidad
+    </h3>
+
+    <!-- Opciones de búsqueda -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Búsqueda por especialidad -->
+      <p-card class="hover:border-2 hover:border-blue-500 rounded-xl hover:shadow-lg cursor-pointer h-full hover:bg-blue-50">
+        <ng-template pTemplate="header">
+          <div class="bg-blue-50 p-4 rounded-t-lg flex justify-center">
+            <i class="pi pi-list text-5xl text-blue-600"></i>
+          </div>
+        </ng-template>
+        <div class="text-center p-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Búsqueda por especialidad</h3>
+          <p class="text-gray-600">Si deseas ver la lista de especialistas</p>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="text-center">
+            <p-button
+              label="Buscar"
+              icon="pi pi-search"
+              styleClass="p-button-outlined p-button-primary"
+              (click)="searchBySpecialty()">
+            </p-button>
+          </div>
+        </ng-template>
+      </p-card>
+
+      <!-- Búsqueda por médico -->
+      <p-card class="hover:border-2 hover:border-green-500 rounded-xl hover:shadow-lg cursor-pointer h-full hover:bg-green-50">
+        <ng-template pTemplate="header">
+          <div class="bg-green-50 p-4 rounded-t-lg flex justify-center">
+            <i class="pi pi-user text-5xl text-green-600"></i>
+          </div>
+        </ng-template>
+        <div class="text-center p-4">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Búsqueda por médico</h3>
+          <p class="text-gray-600">Si conoces el nombre de tu doctor</p>
+        </div>
+        <ng-template pTemplate="footer">
+          <div class="text-center">
+            <p-button
+              label="Buscar"
+              icon="pi pi-search"
+              styleClass="p-button-outlined p-button-success"
+              (click)="searchByDoctor()">
+            </p-button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+</div>

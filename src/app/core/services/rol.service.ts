@@ -20,8 +20,9 @@ export class RolService {
     [UserRole.MEDIC]: [
       { label: 'Inicio', icon: 'pi pi-home', routerLink: '/dashboard/home' },
       { label: 'Mi Cuenta', icon: 'pi pi-users', routerLink: '/medic/profile' },
-      { label: 'Calendario', icon: 'pi pi-calendar', routerLink: '/medic/schedule' },
-      { label: 'Historia Clinica', icon: 'pi pi-file-o', routerLink: '/medic/medical-history' },
+      /*{ label: 'Calendario', icon: 'pi pi-calendar', routerLink: '/medic/schedule' },*/
+      { label: 'Ver Historia Clinica', icon: 'pi pi-file-o', routerLink: '/medic/medical-history' },
+      { label: 'Agregar Historia Clinica', icon: 'pi pi-file-plus', routerLink: '/medic/add-medical-history' },
       { label: 'Salir', icon: 'pi pi-sign-out', routerLink: '/logout' }
     ],
     [UserRole.PATIENT]: [
