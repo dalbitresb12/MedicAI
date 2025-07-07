@@ -4,7 +4,7 @@ import { Observable, tap} from 'rxjs';
 
 import { LoginRequest } from '../models/login-request.model';
 
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 import {User} from '../models/user.model';
 import {AuthResponse} from '../models/auth-response.model';
 import {RegisterRequest, RegisterResponse} from '../models/register.model';
