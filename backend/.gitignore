@@ -49,3 +49,7 @@ coverage.*
 # User-generated folders
 static/
 uploads/
+
+# Docker compose overrides
+docker-compose.override.yaml
+docker-compose.override.yml
