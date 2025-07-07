@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class MedicResponse(BaseModel):
     id: int
     specialty: str

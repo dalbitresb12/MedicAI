@@ -11,5 +11,5 @@ class MedicMapper:
             specialty=medic.specialty,
             full_name=medic.user.full_name,
             email=medic.user.email,
-            profile_picture_url=medic.profile_picture_url
+            profile_picture_url=medic.profile_picture_url,
         )

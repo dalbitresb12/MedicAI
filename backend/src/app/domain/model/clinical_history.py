@@ -1,9 +1,10 @@
-from sqlmodel import SQLModel, Field
 from datetime import datetime
-from typing import Optional
+
+from sqlmodel import Field, SQLModel
+
 
 class ClinicalHistory(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True)
     patient_email: str  # Podemos usar email si no tienes tabla de pacientes aún
     patient_full_name: str
     medic_id: int

@@ -2,7 +2,9 @@ from dependency_injector import containers, providers
 from sqlmodel import Session
 from app.core.database import engine  # Usa directamente el engine
 
-from app.domain.persistence.clinical_history_repository import ClinicalHistoryRepository
+from app.domain.persistence.clinical_history_repository import (
+    ClinicalHistoryRepository,
+)
 from app.domain.persistence.medic_repository import MedicRepository
 from app.security.domain.persistence.user_repository import UserRepository
 from app.security.service.auth_service import AuthService
@@ -21,21 +23,26 @@ def get_session() -> Session:
 
 
 class Container(containers.DeclarativeContainer):
-
-    wiring_config = containers.WiringConfiguration(packages=[
-        "app.security.api",
-        "app.api",
-        "app.crosscutting",
-    ])
+    wiring_config = containers.WiringConfiguration(
+        packages=[
+            "app.security.api",
+            "app.api",
+            "app.crosscutting",
+        ]
+    )
 
     # Session de SQLModel como Singleton (o puedes usar Factory si deseas una nueva por request)
     session = providers.Singleton(get_session)
 
     # Repositories
     userRepository = providers.Factory(UserRepository, session=session)
-    appointmentRepository = providers.Factory(AppointmentRepository, session=session)
+    appointmentRepository = providers.Factory(
+        AppointmentRepository, session=session
+    )
     medicRepository = providers.Factory(MedicRepository, session=session)
-    clinicalHistoryRepository = providers.Factory(ClinicalHistoryRepository,session=session)
+    clinicalHistoryRepository = providers.Factory(
+        ClinicalHistoryRepository, session=session
+    )
 
     # Services
     userService = providers.Factory(UserService, userRepository=userRepository)
@@ -45,17 +52,11 @@ class Container(containers.DeclarativeContainer):
     appointmentService = providers.Factory(
         AppointmentService,
         repository=appointmentRepository,
-        email_service=emailService
+        email_service=emailService,
     )
 
-    medicService = providers.Factory(
-    MedicService,
-    repository=medicRepository 
-    )
-
+    medicService = providers.Factory(MedicService, repository=medicRepository)
 
     clinicalHistoryService = providers.Factory(
-        ClinicalHistoryService,
-        repository=clinicalHistoryRepository
+        ClinicalHistoryService, repository=clinicalHistoryRepository
     )
-

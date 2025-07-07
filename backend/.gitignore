@@ -36,8 +36,8 @@ wheels/
 
 # Env config
 .env
-
-
+.env.*
+!.env.example
 
 # Test outputs
 htmlcov/
@@ -45,3 +45,7 @@ coverage.*
 .tox/
 .nox/
 .pytest_cache/
+
+# User-generated folders
+static/
+uploads/

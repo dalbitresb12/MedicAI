@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+
 class ClinicalHistoryResponse(BaseModel):
     id: int
     patient_email: str

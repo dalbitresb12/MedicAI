@@ -1,6 +1,7 @@
-from typing import Optional
-from pydantic import BaseModel, EmailStr
 from datetime import date, time
+
+from pydantic import BaseModel, EmailStr
+
 
 class CreateAppointmentRequest(BaseModel):
     medic_id: int
@@ -9,7 +10,7 @@ class CreateAppointmentRequest(BaseModel):
     hour: time
 
     # Estos se rellenan en backend, por eso deben ser opcionales
-    patient_email: Optional[EmailStr] = None
-    patient_full_name: Optional[str] = None
-    medic_full_name: Optional[str] = None
-    specialty: Optional[str] = None
+    patient_email: EmailStr | None = None
+    patient_full_name: str | None = None
+    medic_full_name: str | None = None
+    specialty: str | None = None

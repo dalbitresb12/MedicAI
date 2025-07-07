@@ -28,4 +28,4 @@ LICENSE_INFO = {
     "url": "https://opensource.org/licenses/MIT",
 }
 SWAGGER_UI_PARAMETERS = {"syntaxHighlight.theme": "obsidian"}
-SWAGGER_FAVICON_URL = "https://example.com/your-favicon.ico" 
+SWAGGER_FAVICON_URL = "https://example.com/your-favicon.ico"

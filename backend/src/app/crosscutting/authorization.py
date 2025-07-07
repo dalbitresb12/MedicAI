@@ -1,13 +1,13 @@
+from dependency_injector.wiring import Provide, inject
 from fastapi import Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
+from app.core.container import Container
 from app.security.domain.model.user import Role, User
 from app.security.service.auth_service import AuthService
 
-from dependency_injector.wiring import inject, Provide
-from app.core.container import Container
-
 security = HTTPBearer()
+
 
 # Extrae el usuario autenticado a partir del token JWT
 @inject
