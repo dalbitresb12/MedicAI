@@ -9,7 +9,7 @@ env/
 venv/
 
 # VS Code config
-.vscode/
+# .vscode/
 
 # macOS
 .DS_Store
