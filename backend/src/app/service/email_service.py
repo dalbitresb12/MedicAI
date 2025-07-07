@@ -88,9 +88,7 @@ class EmailService:
     def _appointment_confirmation_template(self) -> str:
         import importlib.resources
 
+        parent_module = ".".join(__name__.split(".")[:-1])
         return importlib.resources.read_text(
-            f"{__name__}.email", "appointment-confirmation.template.html"
+            f"{parent_module}.email", "appointment-confirmation.template.html"
         )
-
-
-print(__name__)
