@@ -11,6 +11,7 @@ networks:
 services:
   app:
     image: ghcr.io/dalbitresb12/medicai-backend:latest
+    restart: on-failure:3
     build:
       context: ./backend
     depends_on:
@@ -32,6 +33,7 @@ services:
           - app.medicai.internal
   web:
     image: ghcr.io/dalbitresb12/medicai-frontend:latest
+    restart: unless-stopped
     build:
       context: ./frontend
     expose:
@@ -42,7 +44,7 @@ services:
           - web.medicai.internal
   db:
     image: mysql:8
-    restart: always
+    restart: unless-stopped
     healthcheck:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
       start_period: 10s
