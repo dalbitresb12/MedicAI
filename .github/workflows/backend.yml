@@ -54,8 +54,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-          flavor: |
-            latest=auto
+            type=raw,value=latest,enable={{is_default_branch}}
           labels: |
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
             org.opencontainers.image.authors=${{ github.repository_owner }}
