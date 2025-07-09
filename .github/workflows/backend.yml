@@ -75,8 +75,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          context: backend
-          file: backend/Dockerfile
+          context: "{{defaultContext}}:backend"
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: ${{ steps.meta.outputs.tags }}
