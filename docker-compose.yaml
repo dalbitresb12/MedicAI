@@ -6,18 +6,18 @@ volumes:
 
 networks:
   db-net:
+  web-net:
 
 services:
   app:
     image: ghcr.io/dalbitresb12/medicai-backend:latest
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./backend
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     env_file:
       - .env
     environment:
@@ -30,6 +30,16 @@ services:
       db-net:
         aliases:
           - app.medicai.internal
+  web:
+    image: ghcr.io/dalbitresb12/medicai-frontend:latest
+    build:
+      context: ./frontend
+    expose:
+      - "8080"
+    networks:
+      web-net:
+        aliases:
+          - web.medicai.internal
   db:
     image: mysql:8
     restart: always

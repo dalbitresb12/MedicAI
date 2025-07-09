@@ -54,10 +54,11 @@ cd MedicAI/backend
 uv sync
 ```
 
-## Crear copia del archivo .env.example y ajustar variables
+## Crear copia del archivo .env.example de la carpeta raíz del repositorio y ajustar variables
 
 ```bash
-cp .env.example .env
+# Asume que se encuentra en /path/to/repo/backend
+cp ../.env.example .env
 # Abrir el archivo en su editor de preferencia
 ```
 

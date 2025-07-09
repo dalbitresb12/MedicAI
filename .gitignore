@@ -1,0 +1,4 @@
+# Env config
+.env
+.env.*
+!.env.example

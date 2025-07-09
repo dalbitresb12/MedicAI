@@ -1,4 +1,3 @@
-import os
 from uuid import uuid4
 
 from dependency_injector.wiring import Provide, inject
