@@ -11,8 +11,8 @@ services:
   app:
     image: ghcr.io/dalbitresb12/medicai-backend:latest
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ./backend
+      dockerfile: ./backend/Dockerfile
     depends_on:
       db:
         condition: service_healthy
