@@ -26,14 +26,15 @@ class MedicRepository:
 
     def get_all(self) -> list[Medic]:
         """Obtiene todos los médicos habilitados."""
-        return self.session.query(Medic).filter(Medic.enabled == True).all()
+        return self.session.query(Medic).filter(Medic.enabled == True).all()  # noqa: E712
 
     def get_by_specialty(self, specialty: str) -> list[Medic]:
         """Filtra médicos por especialidad (busqueda parcial e insensible a mayúsculas)."""
         return (
             self.session.query(Medic)
             .filter(
-                Medic.specialty.ilike(f"%{specialty}%"), Medic.enabled == True
+                Medic.specialty.ilike(f"%{specialty}%"),
+                Medic.enabled == True,  # noqa: E712
             )
             .all()
         )
@@ -42,6 +43,6 @@ class MedicRepository:
         return (
             self.session.query(Medic)
             .join(User)  # Hacemos join con la tabla User
-            .filter(User.full_name.ilike(f"%{name}%"), Medic.enabled == True)
+            .filter(User.full_name.ilike(f"%{name}%"), Medic.enabled == True)  # noqa: E712
             .all()
         )
