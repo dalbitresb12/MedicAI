@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     )
 
     database_url: str = Field(default=...)
-    origin_url: str = Field(default=...)
+    origin_url: list[str] = Field(default=[])
     public_logo_url: str = Field(default="")
     initial_admin_username: str = Field(default=...)
     initial_admin_email: str = Field(default=...)
