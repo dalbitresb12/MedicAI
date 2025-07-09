@@ -29,8 +29,10 @@ jobs:
         with:
           python-version-file: '.python-version'
       - name: Install the project
+        working-directory: ${{ github.workspace }}/backend
         run: uv sync --locked --all-extras --dev
       - name: Lint project
+        working-directory: ${{ github.workspace }}/backend
         run: uv run ruff check
   build-docker:
     runs-on: ubuntu-latest
