@@ -41,7 +41,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard],
     data: { roles: [UserRole.PATIENT] },
     children: [
-      { path: 'my-appointments', loadComponent: () => import('./features/patient/components/my-appointment/my-appointment.component').then(m => m.MyAppointmentComponent) },
+      { path: 'my-appointments', loadComponent: () => import('./features/patient/components/my-appointment/my-appointment.component').then(m => m.MyAppointmentsComponent) },
       { path: 'book-appointments', loadComponent: () => import('./features/patient/components/book-appointment/book-appointment.component').then(m => m.BookAppointmentComponent)},
       { path: 'my-appointments/search-availability', loadComponent: () => import('./features/patient/components/book-appointment/search-availability/search-availability.component').then(m => m.SearchAvailabilityComponent) },
       { path: 'my-appointments/search-by-specialty', loadComponent: () => import('./features/patient/components/book-appointment/search-by-specialty/search-by-specialty.component').then(m => m.SearchBySpecialtyComponent) },

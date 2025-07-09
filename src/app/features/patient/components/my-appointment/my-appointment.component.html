@@ -1,1 +1,124 @@
-<p>my-appointment works!</p>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Mis Citas Médicas</h1>
+
+  <!-- Filtros de búsqueda -->
+  <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Buscador general -->
+      <div>
+        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Buscar citas</label>
+        <div class="flex">
+          <input
+            id="search"
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()"
+            placeholder="Buscar por paciente, médico o especialidad..."
+            class="w-full p-3 border border-gray-300 rounded-l-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            pInputText
+          />
+          <button
+            (click)="applyFilters()"
+            class="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-700 transition-colors"
+          >
+            <i class="pi pi-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtro por rango de fechas -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Filtrar por fecha</label>
+        <div class="flex items-center space-x-2">
+          <p-calendar
+            [(ngModel)]="startDate"
+            placeholder="Fecha inicio"
+            dateFormat="yy-mm-dd"
+            inputId="startDate"
+            class="w-full"
+            (onSelect)="applyFilters()"
+          ></p-calendar>
+          <span class="text-gray-500">a</span>
+          <p-calendar
+            [(ngModel)]="endDate"
+            placeholder="Fecha fin"
+            dateFormat="yy-mm-dd"
+            inputId="endDate"
+            class="w-full"
+            (onSelect)="applyFilters()"
+          ></p-calendar>
+          <button
+            (click)="clearFilters()"
+            class="bg-gray-200 text-gray-700 px-4 py-3 rounded-md hover:bg-gray-300 transition-colors"
+            pTooltip="Limpiar filtros" tooltipPosition="top"
+          >
+            <i class="pi pi-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listado de citas con nuevos estilos -->
+  <div class="space-y-4">
+    @for (appointment of filteredAppointments; track appointment.id) {
+      <div
+        class="border-2 border-gray-300 rounded-lg transition-all duration-300
+               hover:border-blue-400 hover:shadow-md hover:bg-blue-50"
+      >
+        <div class="flex flex-col md:flex-row items-center justify-between p-6">
+          <!-- Información de hora -->
+          <div class="text-center md:text-left mb-4 md:mb-0">
+            <div class="text-4xl font-bold text-blue-600">
+              {{ formatTime(appointment.hour) }}
+            </div>
+            <div class="text-gray-600 mt-1 text-sm">
+              {{ appointment.day }}
+            </div>
+          </div>
+
+          <!-- Información del paciente -->
+          <div class="text-center md:text-left mb-4 md:mb-0">
+            <h3 class="text-xl font-semibold text-gray-800">{{ appointment.patient_full_name }}</h3>
+            <p class="text-gray-600 text-sm">{{ appointment.patient_email }}</p>
+            <p class="text-gray-600 text-sm">Edad: {{ appointment.patient_age }} años</p>
+          </div>
+
+          <!-- Información del médico -->
+          <div class="text-center md:text-left">
+            <h3 class="text-xl font-semibold text-gray-800">Dr. {{ appointment.medic_full_name }}</h3>
+            <p class="text-gray-600 text-sm">Especialidad: {{ appointment.specialty }}</p>
+          </div>
+
+          <!-- Acciones -->
+          <div class="mt-4 md:mt-0 flex gap-2">
+            <button
+              pButton
+              icon="pi pi-trash"
+              label="Eliminar"
+              class="p-button-rounded p-button-outlined p-button-sm p-button-danger hover:bg-red-50"
+              (click)="confirmDelete(appointment.id)"
+            ></button>
+          </div>
+
+        </div>
+      </div>
+    } @empty {
+      <div class="text-center py-8 border-2 border-gray-200 rounded-lg bg-gray-50">
+        <i class="pi pi-info-circle text-4xl text-gray-400 mb-4"></i>
+        <h3 class="text-xl text-gray-600">No se encontraron citas</h3>
+        <p class="text-gray-500 mb-4">No hay citas que coincidan con tus criterios de búsqueda</p>
+        <button
+          pButton
+          label="Limpiar filtros"
+          icon="pi pi-filter-slash"
+          class="p-button-text"
+          (click)="clearFilters()"
+        ></button>
+      </div>
+    }
+  </div>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+

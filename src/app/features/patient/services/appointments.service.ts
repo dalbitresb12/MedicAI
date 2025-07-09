@@ -21,6 +21,14 @@ export class AppointmentsService {
     return this.http.get(`${this.apiUrl}/appointments/schedule/${medicId}/${date}`);
   }
 
+  getMyAppointments(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/appointments/my`);
+  }
+
+  deleteAppointment(appointmentId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/appointments/my/${appointmentId}`);
+  }
+
   createAppointment(medic: Medic, date: string, hour: string): Observable<any> {
     const user = this.userService.getCurrentUser();
     const formattedHour = this.formatTimeForAPI(hour);
