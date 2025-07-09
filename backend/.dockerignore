@@ -1,0 +1,11 @@
+.git
+.ruff_cache
+.venv
+.vscode
+static
+.env
+.env.example
+.gitignore
+docker-compose.dev.yaml
+docker-compose.yaml
+Dockerfile
