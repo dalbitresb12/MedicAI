@@ -1,0 +1,43 @@
+/* Estilos personalizados para el scroll */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Estilos para las cards de médicos */
+.medic-card {
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Ajustes para el stepper */
+::ng-deep .p-stepper {
+  .p-stepper-header {
+    @apply border-none;
+  }
+
+  .p-stepper-step {
+    @apply flex-1;
+  }
+
+  .p-stepper-content {
+    @apply mt-6;
+  }
+}

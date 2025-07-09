@@ -1,0 +1,243 @@
+<!-- doctor-select.component.html -->
+<div class="max-w-6xl mx-auto p-4">
+  <!-- Breadcrumb -->
+  <p-breadcrumb [model]="items" [home]="home" class="mb-4"></p-breadcrumb>
+
+  <!-- Stepper -->
+  <div class="card mt-16">
+    <p-stepper [(value)]="activeStep" [linear]="true">
+      <p-step-list class="flex flex-wrap gap-2 md:gap-0">
+        <p-step [value]="1" class="flex-1 min-w-[120px] font-bold">Selección de médico</p-step>
+        <p-step [value]="2" class="flex-1 min-w-[120px] font-bold">Fecha y Hora</p-step>
+        <p-step [value]="3" class="flex-1 min-w-[120px] font-bold">Confirmar</p-step>
+      </p-step-list>
+
+      <p-step-panels class="mt-6">
+        <!-- Paso 1: Selección de médico -->
+        <p-step-panel [value]="1">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-4">
+              <h2 class="text-2xl font-bold text-center">¿Con quién deseas atenderte?</h2>
+              <p class="text-gray-600 text-center mb-4">Búsqueda de doctor</p>
+
+              <p-select
+                [options]="medics"
+                [(ngModel)]="selectedMedic"
+                optionLabel="full_name,specialty"
+                [filter]="true"
+                filterBy="full_name,specialty"
+                [showClear]="true"
+                placeholder="Buscar médico por nombre o especialidad"
+                class="w-full"
+              >
+                <ng-template #selectedItem let-selectedOption>
+                  <div class="flex items-center gap-3">
+                    <div class="relative w-12 h-12"> <!-- Contenedor con tamaño fijo y posición relativa -->
+                      <img
+                        ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{selectedOption.profile_picture_url}}"
+                        class="rounded-full object-cover"
+                        alt="Foto del médico"
+                        fill
+                        priority
+                      />
+                    </div>
+                    <div>
+                      <div class="font-medium">{{ selectedOption.full_name }}</div>
+                      <div class="text-sm text-gray-500">{{ selectedOption.specialty }}</div>
+                    </div>
+                  </div>
+                </ng-template>
+
+                <ng-template let-doctor #item>
+                  <div class="flex items-center gap-3 p-2 rounded">
+                    <div class="relative w-10 h-10"> <!-- Contenedor con tamaño fijo y posición relativa -->
+                      <img
+                        ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{doctor.profile_picture_url}}"
+                        class="rounded-full object-cover"
+                        alt="Foto del médico"
+                        fill
+                        priority
+                      />
+                    </div>
+                    <div>
+                      <div class="font-medium">{{ doctor.full_name }}</div>
+                      <div class="text-sm text-gray-500">{{ doctor.specialty }}</div>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-select>
+
+             <!-- <div class="text-center mt-36">
+                <p class="text-gray-600 mb-2">¿No conoces el nombre de tu médico?</p>
+                <p-button
+                  label="BUSCA POR ESPECIALIDAD"
+                  icon="pi pi-search"
+                  styleClass="p-button-outlined p-button-sm"
+                  (onClick)="navigateToSpecialtySearch()">
+                </p-button>
+              </div>-->
+            </div>
+
+            <div class="flex pt-36 justify-end">
+              <p-button
+                label="Siguiente"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                [disabled]="!selectedMedic"
+                (onClick)="activateCallback(2)" />
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <p-step-panel [value]="2">
+          <ng-template #content let-activateCallback="activateCallback">
+            <div class="flex flex-col gap-6 min-h-[500px]">
+              <h3 class="text-xl font-semibold text-center">Confirmar cita con</h3>
+
+              <div class="bg-blue-50 p-4 rounded-lg flex items-center gap-4">
+                <div class="relative w-12 h-12">
+                  <img
+                    ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
+                    class="rounded-full object-cover"
+                    alt="Foto del médico"
+                    fill
+                    priority
+                  />
+                </div>
+                <div>
+                  <h4 class="font-bold text-lg">{{ selectedMedic!.full_name }}</h4>
+                  <p class="text-gray-600">{{ selectedMedic!.specialty }}</p>
+                </div>
+              </div>
+
+              <!-- Filtros de periodo - Solución con Tailwind -->
+              <div class="flex flex-wrap gap-2 justify-center">
+                <button
+                  (click)="loadWeek()"
+                  [class]="selectedPeriod === 'week'
+      ? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500'
+      : 'bg-white hover:bg-blue-500 hover:text-white border-gray-300 text-gray-700'"
+                  class="transition-colors duration-200 rounded-md border px-3 py-1 text-sm font-medium">
+                  Esta semana
+                </button>
+
+                <button
+                  (click)="loadMonth()"
+                  [class]="selectedPeriod === 'month'? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500'
+                  : 'bg-white hover:bg-blue-500 hover:text-white border-gray-300 text-gray-700'"
+                  class="transition-colors duration-200 rounded-md border px-3 py-1 text-sm font-medium focus:outline-none">
+                  Este mes
+                </button>
+
+                <button
+                  (click)="loadNextMonth()"
+                  [class]="selectedPeriod === 'next-month'? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500'
+                   : 'bg-white hover:bg-blue-500 hover:text-white border-gray-300 text-gray-700'"
+                  class="transition-colors duration-200 rounded-md border px-3 py-1 text-sm font-medium">
+                  Próximo mes
+                </button>
+              </div>
+
+              <!-- Contenedor principal con flex-grow -->
+              <div class="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Calendario -->
+                <p-calendar
+                  [(ngModel)]="selectedDate"
+                  [inline]="true"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  [disabledDates]="disabledDates"
+                  [disabledDays]="[0, 6]"
+                  (onSelect)="loadAvailableHours()"
+                  class="w-full">
+                </p-calendar>
+
+                <!-- Horarios disponibles - Solución con Tailwind -->
+                <div class="min-h-[300px]">
+                  <h4 class="font-medium mb-3">Horarios disponibles</h4>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    @for (hour of availableHours; track hour) {
+                      <button
+                        (click)="selectHour(hour)"
+                        [class]="selectedHour === hour ? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500'
+                          : 'bg-white hover:bg-blue-500 hover:text-white border-gray-300 text-gray-700'"
+                        class="transition-colors duration-200 rounded-md border px-3 py-1 text-sm font-medium focus:outline-none">
+                        {{ hour }}
+                      </button>
+                    }
+                    @if (availableHours.length === 0) {
+                      <div class="col-span-full flex items-center justify-center h-[200px]">
+                        <p class="text-gray-500">No hay horarios disponibles para esta fecha</p>
+                      </div>
+                    }
+                  </div>
+                </div>
+
+
+              </div>
+
+              <!-- Botones fijos en la parte inferior -->
+              <div class="mt-auto pt-12 flex justify-between">
+                <p-button
+                  label="Atrás"
+                  severity="secondary"
+                  icon="pi pi-arrow-left"
+                  (onClick)="activateCallback(1)" />
+                <p-button
+                  label="Siguiente"
+                  icon="pi pi-arrow-right"
+                  iconPos="right"
+                  [disabled]="!selectedHour && selectedDate"
+                  (onClick)="activateCallback(3)" />
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+        <!-- Paso 3: Finalización -->
+        <p-step-panel [value]="3">
+          <ng-template #content>
+            <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+              <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">¡Ya casi terminas!</h3>
+                <p class="text-lg text-gray-600 mb-4">Revisa y confirma</p>
+              </div>
+
+              <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                <div class="flex items-center gap-4 mb-4">
+                  <p-tag value="Presencial" severity="info"></p-tag> <!--falta cambiar el valor del presencial | virtual-->
+                  <span class="font-semibold">{{ selectedDate | date:'EEEE dd/MM/yyyy' }}</span>
+                  <span class="font-semibold">{{ selectedHour }}</span>
+                </div>
+
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                    <img [src]="'http://127.0.0.1:8000/static/profile_pictures/' + selectedMedic?.profile_picture_url"
+                         alt="Doctor" class="w-full h-full object-cover">
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-lg">{{ selectedMedic?.full_name }}</h4>
+                    <p class="text-gray-600">{{ selectedMedic?.specialty }}</p>
+                  </div>
+                </div>
+
+                <div class="border-t pt-4">
+                  <p class="font-semibold">{{currentUser?.role}}</p>
+                  <p>{{ currentUser?.full_name }}</p>
+                  <p>{{ currentUser?.email}}</p>
+
+                </div>
+              </div>
+
+              <div class="flex justify-between mt-6">
+                <p-button label="Cancelar" severity="danger" (click)="activeStep = 1"></p-button>
+                <p-button label="Confirmar mi cita" (click)="confirmAppointment()"></p-button>
+              </div>
+            </div>
+          </ng-template>
+        </p-step-panel>
+
+      </p-step-panels>
+    </p-stepper>
+  </div>
+</div>

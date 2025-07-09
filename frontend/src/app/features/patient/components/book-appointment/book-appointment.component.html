@@ -1,0 +1,81 @@
+<div class="max-w-4xl mx-auto p-6">
+
+  <h1 class="text-3xl text-gray-800 mb-6 text-center">
+    Programa una cita virtual o presencial en nuestro Policlinico
+  </h1>
+
+  <h2 class="text-xl text-gray-600 mb-8 text-center">
+    Selecciona el tipo de atención de tu preferencia
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Cita Presencial -->
+    <p-card class="hover:border-2 hover:border-blue-500 rounded-xl hover:shadow-lg cursor-pointer h-full hover:bg-blue-50">
+      <ng-template pTemplate="header">
+        <div class="bg-blue-50 p-4 rounded-t-lg">
+          <i class="pi pi-building text-5xl text-blue-600 mx-auto block"></i>
+        </div>
+      </ng-template>
+      <div class="text-center p-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Cita presencial</h3>
+        <p class="text-gray-600">Agenda una cita con un especialista</p>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="text-center">
+          <p-button
+            (click)="navigateTo('/patient/my-appointments/search-by-doctor')"
+            label="Seleccionar"
+            icon="pi pi-calendar-plus"
+            styleClass="p-button-outlined p-button-primary">
+          </p-button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <!-- Cita Virtual -->
+    <p-card class="hover:border-2 hover:border-green-500 rounded-xl hover:shadow-lg cursor-pointer h-full hover:bg-green-50">
+      <ng-template pTemplate="header">
+        <div class="bg-green-50 p-4 rounded-t-lg">
+          <i class="pi pi-video text-5xl text-green-600 mx-auto block"></i>
+        </div>
+      </ng-template>
+      <div class="text-center p-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Cita virtual</h3>
+        <p class="text-gray-600">Agenda una cita con un especialista</p>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="text-center">
+          <p-button
+            (click)="navigateTo('patient/my-appointments/search-by-doctor')"
+            label="Seleccionar"
+            icon="pi pi-calendar-plus"
+            styleClass="p-button-outlined p-button-success">
+          </p-button>
+        </div>
+      </ng-template>
+    </p-card>
+
+    <!-- Chequeo Médico -->
+    <p-card class="hover:border-2 hover:border-purple-500 rounded-xl cursor-pointer h-full hover:bg-purple-50">
+      <ng-template pTemplate="header">
+        <div class="bg-purple-50 p-4 rounded-t-lg">
+          <i class="pi pi-heart text-5xl text-purple-600 mx-auto block"></i>
+        </div>
+      </ng-template>
+      <div class="text-center p-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Chequeo médico</h3>
+        <p class="text-gray-600">Agenda una cita para tu chequeo</p>
+      </div>
+      <ng-template pTemplate="footer">
+        <div class="text-center">
+          <p-button
+            (click)="navigateTo('/patient/my-appointments/search-by-doctor')"
+            label="Seleccionar"
+            icon="pi pi-calendar-plus"
+            styleClass="p-button-outlined p-button-help">
+          </p-button>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
