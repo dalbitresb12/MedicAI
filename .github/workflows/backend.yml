@@ -94,6 +94,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            if [ ! -d "app" ]; then
+              git clone git@github.com:${{ github.repository }}.git app
+            fi
+
             cd app
             git checkout main
             git pull origin main
