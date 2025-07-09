@@ -1,4 +1,5 @@
 export const environment = {
-    production: false,
-    apiUrl: 'https://medicai-api.dalbitresb.com/api/v1'
+    production: true,
+    apiUrl: 'https://medicai-api.dalbitresb.com/api/v1',
+    apiPhoto: 'https://medicai-api.dalbitresb.com'
 };

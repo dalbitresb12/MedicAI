@@ -15,6 +15,7 @@ import {AppointmentsService} from '../../../services/appointments.service';
 import {Tag} from 'primeng/tag';
 import {UserService} from '../../../../../core/services/user.service';
 import {User} from '../../../../auth/models/user.model';
+import {environment} from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-search-by-doctor',
@@ -218,4 +219,5 @@ export class SearchByDoctorComponent implements OnInit {
   }
 
 
+  protected readonly environment = environment;
 }
