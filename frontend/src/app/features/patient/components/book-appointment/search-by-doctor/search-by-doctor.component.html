@@ -34,7 +34,7 @@
                   <div class="flex items-center gap-3">
                     <div class="relative w-12 h-12"> <!-- Contenedor con tamaño fijo y posición relativa -->
                       <img
-                        ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{selectedOption.profile_picture_url}}"
+                        ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedOption.profile_picture_url}}"
                         class="rounded-full object-cover"
                         alt="Foto del médico"
                         fill
@@ -52,7 +52,7 @@
                   <div class="flex items-center gap-3 p-2 rounded">
                     <div class="relative w-10 h-10"> <!-- Contenedor con tamaño fijo y posición relativa -->
                       <img
-                        ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{doctor.profile_picture_url}}"
+                        ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{doctor.profile_picture_url}}"
                         class="rounded-full object-cover"
                         alt="Foto del médico"
                         fill
@@ -97,7 +97,7 @@
               <div class="bg-blue-50 p-4 rounded-lg flex items-center gap-4">
                 <div class="relative w-12 h-12">
                   <img
-                    ngSrc="http://127.0.0.1:8000/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
+                    ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
                     class="rounded-full object-cover"
                     alt="Foto del médico"
                     fill
@@ -211,9 +211,9 @@
                 </div>
 
                 <div class="flex items-center gap-4 mb-4">
-                  <div class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-                    <img [src]="'http://127.0.0.1:8000/static/profile_pictures/' + selectedMedic?.profile_picture_url"
-                         alt="Doctor" class="w-full h-full object-cover">
+                  <div class="w-12 h-12 relative">
+                    <img ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
+                         alt="Doctor" class="rounded-full object-cover" fill>
                   </div>
                   <div>
                     <h4 class="font-bold text-lg">{{ selectedMedic?.full_name }}</h4>

@@ -13,8 +13,6 @@ import {ButtonDirective} from 'primeng/button';
     Card,
     Avatar,
     NgClass,
-    Divider,
-    ButtonDirective
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
