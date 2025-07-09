@@ -1,8 +1,6 @@
-FROM ghcr.io/astral-sh/uv:latest AS uv
-
 FROM python:3.12-slim
 
-COPY --from=uv /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 WORKDIR /app
 
@@ -26,7 +24,5 @@ VOLUME [ "/mnt/static" ]
 VOLUME [ "/mnt/uploads" ]
 
 ENV PYTHONPATH=/app/src
-
-LABEL org.opencontainers.image.source=https://github.com/dalbitresb12/MedicAI
 
 CMD [ "uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000" ]
