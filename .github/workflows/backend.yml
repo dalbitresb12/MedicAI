@@ -27,12 +27,12 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: '.python-version'
+          python-version-file: 'backend/.python-version'
       - name: Install the project
-        working-directory: ${{ github.workspace }}/backend
+        working-directory: backend
         run: uv sync --locked --all-extras --dev
       - name: Lint project
-        working-directory: ${{ github.workspace }}/backend
+        working-directory: backend
         run: uv run ruff check
   build-docker:
     runs-on: ubuntu-latest
