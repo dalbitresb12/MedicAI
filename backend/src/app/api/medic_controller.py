@@ -97,7 +97,7 @@ def upload_medic_photo(
     service.update_profile_picture(current_user.id, filename)
 
     # Retornar URL accesible
-    return f"/static/uploads/{filename}"
+    return f"/uploads/{filename}"
 
 
 @router.patch(

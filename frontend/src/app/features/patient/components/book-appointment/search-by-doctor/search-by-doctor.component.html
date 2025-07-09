@@ -34,7 +34,7 @@
                   <div class="flex items-center gap-3">
                     <div class="relative w-12 h-12"> <!-- Contenedor con tamaño fijo y posición relativa -->
                       <img
-                        ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedOption.profile_picture_url}}"
+                        ngSrc="{{environment.apiPhoto}}/{{selectedOption.profile_picture_url}}"
                         class="rounded-full object-cover"
                         alt="Foto del médico"
                         fill
@@ -52,7 +52,7 @@
                   <div class="flex items-center gap-3 p-2 rounded">
                     <div class="relative w-10 h-10"> <!-- Contenedor con tamaño fijo y posición relativa -->
                       <img
-                        ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{doctor.profile_picture_url}}"
+                        ngSrc="{{environment.apiPhoto}}/{{doctor.profile_picture_url}}"
                         class="rounded-full object-cover"
                         alt="Foto del médico"
                         fill
@@ -97,7 +97,7 @@
               <div class="bg-blue-50 p-4 rounded-lg flex items-center gap-4">
                 <div class="relative w-12 h-12">
                   <img
-                    ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
+                    ngSrc="{{environment.apiPhoto}}/{{selectedMedic!.profile_picture_url}}"
                     class="rounded-full object-cover"
                     alt="Foto del médico"
                     fill
@@ -212,7 +212,7 @@
 
                 <div class="flex items-center gap-4 mb-4">
                   <div class="w-12 h-12 relative">
-                    <img ngSrc="{{environment.apiPhoto}}/static/profile_pictures/{{selectedMedic!.profile_picture_url}}"
+                    <img ngSrc="{{environment.apiPhoto}}/{{selectedMedic!.profile_picture_url}}"
                          alt="Doctor" class="rounded-full object-cover" fill>
                   </div>
                   <div>

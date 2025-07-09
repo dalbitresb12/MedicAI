@@ -56,7 +56,7 @@ def create_app():
         name="static",
     )
     app.mount(
-        "/static/uploads",
+        "/uploads",
         StaticFiles(directory=settings.uploads_directory),
         name="uploads",
     )
